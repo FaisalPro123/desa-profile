@@ -1,0 +1,464 @@
+/* Interactive Map Styles */
+.cyber-map-container {
+  position: relative;
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.leaflet-map-canvas {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Compass */
+.map-compass-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.compass-ring {
+  position: relative;
+  width: 45px;
+  height: 45px;
+  border: 2px solid #e2e8f0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.compass-ring span {
+  position: absolute;
+  font-size: 10px;
+  font-weight: bold;
+  color: #64748b;
+}
+
+.north { top: 2px; }
+.east { right: 2px; }
+.south { bottom: 2px; }
+.west { left: 2px; }
+
+.compass-needle {
+  color: #6366f1;
+}
+
+/* Legend Panel */
+.map-legend-panel {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 280px;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  z-index: 1000;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+
+.legend-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.legend-header h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.legend-quick-toggle {
+  display: flex;
+  gap: 8px;
+  font-size: 11px;
+}
+
+.legend-quick-toggle button {
+  background: none;
+  border: none;
+  color: #6366f1;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.legend-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.legend-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 12px;
+  background: transparent;
+}
+
+.legend-items-list {
+  padding: 16px 20px;
+}
+
+.legend-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border: none;
+  background: none;
+  width: 100%;
+  cursor: pointer;
+  border-bottom: 1px solid #f8fafc;
+}
+
+.legend-item.disabled {
+  opacity: 0.5;
+}
+
+.legend-item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.legend-color-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-label {
+  font-size: 12px;
+  color: #334155;
+  font-weight: 500;
+}
+
+.legend-item-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-count {
+  font-size: 11px;
+  color: #64748b;
+  min-width: 20px;
+  text-align: right;
+}
+
+.checkbox-box {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #d1d5db;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.checkbox-box.checked {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: white;
+}
+
+.legend-basemap-select {
+  padding: 16px 20px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.basemap-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.basemap-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.basemap-btn {
+  flex: 1;
+  padding: 6px 8px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  border-radius: 6px;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.basemap-btn.active {
+  background: #6366f1;
+  color: white;
+  border-color: #6366f1;
+}
+
+/* Custom Markers */
+.custom-map-marker-wrapper {
+  background: none !important;
+  border: none !important;
+}
+
+.map-marker-pin {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-marker-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--marker-color);
+  opacity: 0.2;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.8); opacity: 0.3; }
+  50% { transform: scale(1.2); opacity: 0.1; }
+  100% { transform: scale(0.8); opacity: 0.3; }
+}
+
+.map-marker-inner {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--marker-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  position: relative;
+}
+
+.alarm-exclamation {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* Zoom Controls */
+.map-zoom-controls {
+  position: absolute;
+  bottom: 80px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.map-control-btn {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #64748b;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.2s;
+}
+
+.map-control-btn:hover {
+  background: white;
+  color: #6366f1;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Bottom Badge */
+.map-bottom-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+  background: rgba(34, 197, 94, 0.95);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+/* Leaflet Popup Customization */
+.cyber-popup .leaflet-popup-content-wrapper {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  padding: 0;
+  overflow: hidden;
+}
+
+.cyber-popup .leaflet-popup-tip {
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.popup-card-content {
+  padding: 16px;
+}
+
+.popup-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 12px;
+  width: fit-content;
+}
+
+.popup-rw-tag {
+  opacity: 0.8;
+}
+
+.popup-title {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.popup-desc {
+  margin: 0 0 12px 0;
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.popup-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.popup-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #64748b;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+/* Tooltips */
+.rw-label-tooltip {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.rw-label-tooltip .leaflet-tooltip-content {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.batas-label-tooltip,
+.sungai-label-tooltip {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.batas-label-tooltip .leaflet-tooltip-content,
+.sungai-label-tooltip .leaflet-tooltip-content {
+  background: rgba(0, 229, 255, 0.9);
+  color: white;
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-size: 9px;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .map-legend-panel {
+    width: 250px;
+    right: 10px;
+    top: 10px;
+  }
+  
+  .map-compass-badge {
+    left: 10px;
+    top: 10px;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .compass-ring {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .map-zoom-controls {
+    right: 10px;
+    bottom: 60px;
+  }
+  
+  .map-bottom-badge {
+    left: 10px;
+    bottom: 10px;
+  }
+}
