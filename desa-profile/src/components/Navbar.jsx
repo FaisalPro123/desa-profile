@@ -5,7 +5,6 @@ import { useApp } from '../context/AppContext';
 
 const MENU = [
   { id: 'profil',    label: 'Profil' },
-  { id: 'anggota',   label: 'Anggota' },
   { id: 'statistik', label: 'Statistik' },
   { id: 'peta',      label: 'Peta' },
   { id: 'berita',    label: 'Berita' },

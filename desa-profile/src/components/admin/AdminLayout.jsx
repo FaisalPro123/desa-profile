@@ -3,7 +3,7 @@ import { NavLink, useNavigate, Outlet } from 'react-router-dom';
 import {
   LayoutDashboard, Users, UserCog, BarChart2, Newspaper,
   Store, Camera, MessageSquare, LogOut, Menu, X, ChevronRight,
-  Building2, FileText, MapPin
+  Building2, FileText, MapPin, Settings
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import '../../admin.css';
@@ -11,7 +11,7 @@ import '../../admin.css';
 const NAV = [
   { to: '/admin/dashboard',    label: 'Dashboard',          icon: <LayoutDashboard size={18} /> },
   { to: '/admin/warga',        label: 'Data Warga',         icon: <Users size={18} /> },
-  { to: '/admin/aparat',       label: 'anggota desa',     icon: <UserCog size={18} /> },
+  { to: '/admin/aparat',       label: 'Anggota Desa',       icon: <UserCog size={18} /> },
   { to: '/admin/statistik',    label: 'Statistik',          icon: <BarChart2 size={18} /> },
   { to: '/admin/berita',       label: 'Berita',             icon: <Newspaper size={18} /> },
   { to: '/admin/umkm',         label: 'UMKM',               icon: <Store size={18} /> },
@@ -19,6 +19,7 @@ const NAV = [
   { to: '/admin/cctv',         label: 'CCTV',               icon: <Camera size={18} /> },
   { to: '/admin/pengajuan-dokumen', label: 'Pengajuan Dokumen', icon: <FileText size={18} /> },
   { to: '/admin/peta',         label: 'Kelola Peta',        icon: <MapPin size={18} /> },
+  { to: '/admin/settings',     label: 'Pengaturan Data',    icon: <Settings size={18} /> },
 ];
 
 export default function AdminLayout() {

@@ -793,3 +793,227 @@
     padding: 1rem;
   }
 }
+
+/* ══════════════════════════════════════════
+   DARK MODE — ADMIN OVERRIDES
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .adm-shell {
+  background: #0b1120;
+}
+
+[data-theme="dark"] .adm-topbar {
+  background: #0d1424;
+  border-bottom-color: rgba(255,255,255,.08);
+}
+[data-theme="dark"] .adm-burger { color: #e2e8f0; }
+[data-theme="dark"] .adm-burger:hover { background: rgba(255,255,255,.06); }
+
+[data-theme="dark"] .adm-page-head h1 { color: #ffffff; }
+[data-theme="dark"] .adm-page-head p { color: #94a3b8; }
+
+[data-theme="dark"] .btn-adm-outline {
+  background: #152033;
+  border-color: rgba(255,255,255,.15);
+  color: #e2e8f0;
+}
+[data-theme="dark"] .btn-adm-outline:hover {
+  border-color: #818cf8;
+  color: #a5b4fc;
+  background: rgba(99,102,241,.12);
+}
+
+[data-theme="dark"] .adm-search-bar {
+  background: #152033;
+  border-color: rgba(255,255,255,.12);
+}
+[data-theme="dark"] .adm-search-bar input { color: #f8fafc; }
+
+/* Table */
+[data-theme="dark"] .adm-table-wrap {
+  background: #152033;
+  border-color: rgba(255,255,255,.1);
+}
+[data-theme="dark"] .adm-table thead tr,
+[data-theme="dark"] .adm-table-footer {
+  background: #0f172a;
+}
+[data-theme="dark"] .adm-table th { color: #94a3b8; border-bottom-color: rgba(255,255,255,.1); }
+[data-theme="dark"] .adm-table td { color: #e2e8f0; border-bottom-color: rgba(255,255,255,.06); }
+[data-theme="dark"] .adm-table-footer { color: #94a3b8; border-top-color: rgba(255,255,255,.08); }
+[data-theme="dark"] .adm-table tbody tr:hover { background: rgba(255,255,255,.04); }
+
+/* Modal & confirm */
+[data-theme="dark"] .adm-modal,
+[data-theme="dark"] .adm-confirm {
+  background: #152033;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+[data-theme="dark"] .adm-modal-head,
+[data-theme="dark"] .adm-modal-foot {
+  border-color: rgba(255,255,255,.08);
+}
+[data-theme="dark"] .adm-modal-head h2,
+[data-theme="dark"] .adm-confirm h3 { color: #ffffff; }
+[data-theme="dark"] .adm-modal-head button:hover { background: rgba(255,255,255,.08); color: #e2e8f0; }
+[data-theme="dark"] .adm-confirm p { color: #94a3b8; }
+[data-theme="dark"] .adm-confirm-close { background: rgba(255,255,255,.08); color: #94a3b8; }
+[data-theme="dark"] .adm-confirm-close:hover { background: rgba(255,255,255,.14); color: #ffffff; }
+
+/* Forms */
+[data-theme="dark"] .adm-form-group label { color: #cbd5e1; }
+[data-theme="dark"] .adm-form-group input,
+[data-theme="dark"] .adm-form-group select,
+[data-theme="dark"] .adm-form-group textarea {
+  background: #0f172a;
+  border-color: rgba(255,255,255,.15);
+  color: #f8fafc;
+}
+[data-theme="dark"] .adm-form-group input:disabled,
+[data-theme="dark"] .stat-ov-input input:disabled,
+[data-theme="dark"] .adm-stat-ov-input-wrap input:disabled {
+  background: #1e293b;
+  color: #64748b;
+}
+
+/* Dashboard */
+[data-theme="dark"] .dash-card,
+[data-theme="dark"] .dash-chart-box,
+[data-theme="dark"] .dash-table-box {
+  background: #152033;
+  border-color: rgba(255,255,255,.1);
+  box-shadow: 0 4px 16px rgba(0,0,0,.3);
+}
+[data-theme="dark"] .dash-card:hover,
+[data-theme="dark"] .dash-chart-box:hover,
+[data-theme="dark"] .dash-table-box:hover { box-shadow: 0 10px 28px rgba(0,0,0,.4); }
+[data-theme="dark"] .dash-chart-box h3,
+[data-theme="dark"] .dash-table-box h3 { color: #e2e8f0; }
+[data-theme="dark"] .dash-cctv-item span:nth-child(2) { color: #e2e8f0; }
+[data-theme="dark"] .dash-cctv-status.off { background: rgba(255,255,255,.08); color: #94a3b8; }
+[data-theme="dark"] .dash-empty { color: #94a3b8; }
+
+/* Statistik admin */
+[data-theme="dark"] .stat-ov-input,
+[data-theme="dark"] .adm-stat-ov-card,
+[data-theme="dark"] .adm-stat-section,
+[data-theme="dark"] .stat-section {
+  background: #152033;
+  border-color: rgba(255,255,255,.1);
+}
+[data-theme="dark"] .stat-ov-input label,
+[data-theme="dark"] .adm-stat-ov-field label,
+[data-theme="dark"] .stat-num-input label { color: #94a3b8; }
+[data-theme="dark"] .stat-ov-input input,
+[data-theme="dark"] .adm-stat-ov-input-wrap input,
+[data-theme="dark"] .stat-num-wrap input {
+  background: #0f172a;
+  border-color: rgba(255,255,255,.15);
+  color: #a5b4fc;
+}
+[data-theme="dark"] .adm-stat-section-head {
+  background: #0f172a;
+  border-bottom-color: rgba(255,255,255,.06);
+}
+[data-theme="dark"] .adm-stat-section-head h3 { color: #ffffff; }
+[data-theme="dark"] .stat-array-editor,
+[data-theme="dark"] .stat-section-body {
+  border-right-color: rgba(255,255,255,.06);
+}
+[data-theme="dark"] .stat-ae-head span,
+[data-theme="dark"] .stat-chart-wrap h4 { color: #e2e8f0; }
+[data-theme="dark"] .stat-ae-row input {
+  background: #0f172a;
+  border-color: rgba(255,255,255,.15);
+  color: #f8fafc;
+}
+
+/* Aparat */
+[data-theme="dark"] .aparat-card {
+  background: #152033;
+  border-color: rgba(255,255,255,.1);
+}
+[data-theme="dark"] .aparat-card:hover { border-color: #818cf8; box-shadow: 0 12px 32px rgba(0,0,0,.4); }
+[data-theme="dark"] .aparat-card h3 { color: #ffffff; }
+[data-theme="dark"] .aparat-photo { border-color: #334155; }
+
+/* Berita admin */
+[data-theme="dark"] .berita-admin-item,
+[data-theme="dark"] .laporan-item {
+  background: #152033;
+  border-color: rgba(255,255,255,.1);
+}
+[data-theme="dark"] .berita-admin-item:hover,
+[data-theme="dark"] .laporan-item:hover { box-shadow: 0 6px 20px rgba(0,0,0,.4); border-color: #818cf8; }
+[data-theme="dark"] .bai-body h3,
+[data-theme="dark"] .lap-nama { color: #ffffff; }
+[data-theme="dark"] .bai-body p,
+[data-theme="dark"] .lap-isi { color: #94a3b8; }
+[data-theme="dark"] .lap-detail-row { border-bottom-color: rgba(255,255,255,.06); }
+[data-theme="dark"] .lap-detail-row span { color: #94a3b8; }
+[data-theme="dark"] .lap-detail-row b,
+[data-theme="dark"] .lap-detail-row p { color: #e2e8f0; }
+[data-theme="dark"] .lap-detail-row.col p { background: #0f172a; }
+[data-theme="dark"] .lap-detail-row.replied p { background: rgba(16,185,129,.12); color: #6ee7b7; }
+
+/* CCTV admin */
+[data-theme="dark"] .cctv-card {
+  background: #152033;
+  border-color: rgba(255,255,255,.1);
+}
+[data-theme="dark"] .cctv-lokasi { color: #ffffff; }
+[data-theme="dark"] .cctv-lokasi-input,
+[data-theme="dark"] .cctv-url-input {
+  background: #0f172a;
+  border-color: rgba(255,255,255,.15);
+  color: #f8fafc;
+}
+[data-theme="dark"] .cctv-note { color: #94a3b8; }
+[data-theme="dark"] .cctv-status-bar {
+  background: rgba(16,185,129,.12);
+  border-color: rgba(16,185,129,.3);
+  color: #6ee7b7;
+}
+
+/* Login */
+[data-theme="dark"] .login-card {
+  background: #152033;
+}
+[data-theme="dark"] .login-header h1,
+[data-theme="dark"] .lf-group label { color: #ffffff; }
+[data-theme="dark"] .login-header p { color: #94a3b8; }
+[data-theme="dark"] .lf-input-wrap input {
+  background: #0f172a;
+  border-color: rgba(255,255,255,.15);
+  color: #f8fafc;
+}
+[data-theme="dark"] .lf-input-wrap input:focus {
+  border-color: #818cf8;
+  background: #152033;
+}
+[data-theme="dark"] .login-error { background: rgba(239,68,68,.12); color: #fca5a5; }
+[data-theme="dark"] .login-hint { border-top-color: rgba(255,255,255,.08); }
+[data-theme="dark"] .login-hint code { background: #0f172a; color: #a5b4fc; }
+[data-theme="dark"] .login-tabs { background: #0f172a; }
+[data-theme="dark"] .login-tab-btn { color: #94a3b8; }
+[data-theme="dark"] .login-tab-btn.active {
+  background: #1e293b;
+  color: #a5b4fc;
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+}
+[data-theme="dark"] .login-tab-btn:hover:not(.active) { color: #e2e8f0; }
+[data-theme="dark"] .reg-note { color: #94a3b8; }
+
+/* Pengaduan admin (same classes as public, dark already handled in cctv-pengaduan.css) */
+
+/* Status badges - keep readable on dark */
+[data-theme="dark"] .status-badge.baru      { background: rgba(245,158,11,.15); color: #fbbf24; }
+[data-theme="dark"] .status-badge.diproses  { background: rgba(59,130,246,.15); color: #93c5fd; }
+[data-theme="dark"] .status-badge.selesai,
+[data-theme="dark"] .status-badge.aktif     { background: rgba(16,185,129,.15); color: #6ee7b7; }
+[data-theme="dark"] .status-badge.nonaktif  { background: rgba(239,68,68,.15); color: #fca5a5; }
+[data-theme="dark"] .status-toggle.aktif    { background: rgba(16,185,129,.15); color: #6ee7b7; }
+[data-theme="dark"] .status-toggle.nonaktif { background: rgba(239,68,68,.15); color: #fca5a5; }
+[data-theme="dark"] .dash-cctv-status.on    { background: rgba(16,185,129,.15); color: #6ee7b7; }
+[data-theme="dark"] .cctv-toggle.on         { background: rgba(16,185,129,.15); color: #6ee7b7; }
+[data-theme="dark"] .cctv-toggle.off        { background: rgba(239,68,68,.15); color: #fca5a5; }
+

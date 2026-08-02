@@ -2,11 +2,12 @@ import {
   MapPin, Users, Calendar, Award, BookOpen, Target, Landmark,
   Maximize2, Map, Building2, Camera, TrendingUp, BarChart3,
   GraduationCap, Heart, Briefcase, Home, Activity, UserCheck,
-  Baby, Layers, ShieldCheck, Droplets
+  Baby, Layers, ShieldCheck, Droplets, Mail, Phone, UserX
 } from 'lucide-react';
 import PageHeaderPhoto from '../components/PageHeaderPhoto';
 import { useApp } from '../context/AppContext';
 import InteractiveMap from '../components/InteractiveMap';
+
 import {
   BarChart, Bar, PieChart as RechartsPie, Pie, Cell,
   ResponsiveContainer, Legend, Tooltip, XAxis, YAxis,
@@ -79,64 +80,61 @@ const MiniStat = ({ label, value, color, icon }) => (
    MAIN COMPONENT
 ═══════════════════════════════════════════════════════ */
 const Profil = () => {
-  const { infoDesa, statistik, warga } = useApp();
+  const { infoDesa, statistik, warga, aparat } = useApp();
   const d = infoDesa || {};
   const s = statistik || {};
 
-  /* ── derive stats from warga sample ─────────────── */
-  const total   = warga.length || s.totalPenduduk || 0;
-  const lk      = warga.filter(w=>w.jenis_kelamin==='Laki-laki').length   || s.lakiLaki  || 0;
-  const pr      = warga.filter(w=>w.jenis_kelamin==='Perempuan').length   || s.perempuan || 0;
+  /* ── derive stats: prioritaskan data statistik admin s ─────────────── */
+  const total   = s.totalPenduduk || warga.length || 0;
+  const lk      = s.lakiLaki  || warga.filter(w=>w.jenis_kelamin==='Laki-laki').length   || 0;
+  const pr      = s.perempuan || warga.filter(w=>w.jenis_kelamin==='Perempuan').length   || 0;
   const curYear = new Date().getFullYear();
   const getAge  = w => curYear - parseInt(w.tanggal_lahir?.split('-')[0]||'1990');
-  const anak    = warga.filter(w=>getAge(w)<18).length;
-  const dewasa  = warga.filter(w=>getAge(w)>=18&&getAge(w)<60).length;
-  const lansia  = warga.filter(w=>getAge(w)>=60).length;
+  const anak    = s.usia?.find(u=>u.label?.includes('0-14'))?.value || warga.filter(w=>getAge(w)<18).length;
+  const dewasa  = s.usia?.find(u=>u.label?.includes('15-64'))?.value || warga.filter(w=>getAge(w)>=18&&getAge(w)<60).length;
+  const lansia  = s.usia?.find(u=>u.label?.includes('65+'))?.value || warga.filter(w=>getAge(w)>=60).length;
   const kk      = s.kk || Math.floor(total/4);
 
-  /* ── education from warga ───────────────────────── */
-  const pendMap = {};
-  warga.forEach(w=>{ const p=w.pendidikan||'Tidak Sekolah'; pendMap[p]=(pendMap[p]||0)+1; });
-  const ORDER_PEND = ['SD','SMP','SMA','Diploma','Sarjana'];
-  const pendData = ORDER_PEND.filter(k=>pendMap[k])
-    .map(k=>({ name:k, value:pendMap[k] }));
+  const sortedAparat = [...(aparat || [])].sort(
+    (a, b) => (a.rank || a.urutan || 99) - (b.rank || b.urutan || 99)
+  );
 
-  /* ── jobs from warga ────────────────────────────── */
-  const jobMap = {};
-  warga.forEach(w=>{ const p=w.pekerjaan||'Lainnya'; jobMap[p]=(jobMap[p]||0)+1; });
-  const jobData = Object.entries(jobMap)
-    .map(([name,value])=>({name,value}))
-    .sort((a,b)=>b.value-a.value).slice(0,8);
 
-  /* ── religion from warga ────────────────────────── */
+  /* ── education from admin s.pendidikan ───────────────────────── */
+  const pendData = (s.pendidikan || s.pendidikanDetail || []).map(p => ({
+    name: p.label || p.tingkat || '',
+    value: p.value || p.jumlah || 0
+  }));
+
+  /* ── jobs from admin s.pekerjaan ────────────────────────────── */
+  const jobData = (s.pekerjaan || s.pekerjaanDetail || []).map(p => ({
+    name: p.label || p.jenis || '',
+    value: p.value || p.jumlah || 0
+  }));
+
+  /* ── religion ────────────────────────── */
   const agamaMap = {};
   warga.forEach(w=>{ const a=w.agama||'Islam'; agamaMap[a]=(agamaMap[a]||0)+1; });
   const agamaData = Object.entries(agamaMap)
     .map(([name,value])=>({name,value}));
 
-  /* ── marital status from warga ──────────────────── */
+  /* ── marital status ──────────────────── */
   const nikahMap = {};
   warga.forEach(w=>{ const sp=w.status_perkawinan||'Belum Menikah'; nikahMap[sp]=(nikahMap[sp]||0)+1; });
   const nikahData = Object.entries(nikahMap)
     .map(([name,value])=>({name,value}));
 
-  /* ── age group bar ──────────────────────────────── */
-  const ageData = [
-    { name:'Anak (<18)',    value:anak },
-    { name:'Dewasa (18-59)', value:dewasa },
-    { name:'Lansia (60+)',  value:lansia },
-  ];
-
-  /* ── pertumbuhan ────────────────────────────────── */
-  const growthBase = s.pertumbuhan && s.pertumbuhan.length
-    ? s.pertumbuhan
+  /* ── age group bar from admin s.usia ──────────────────────── */
+  const ageData = (s.usia && s.usia.length > 0)
+    ? s.usia.map(u => ({ name: u.label, value: u.value }))
     : [
-        { tahun:'2020', jumlah:Math.round(total*.83) },
-        { tahun:'2021', jumlah:Math.round(total*.88) },
-        { tahun:'2022', jumlah:Math.round(total*.92) },
-        { tahun:'2023', jumlah:Math.round(total*.96) },
-        { tahun:'2024', jumlah:total },
+        { name:'Anak (0-14)',    value: anak },
+        { name:'Dewasa (15-64)', value: dewasa },
+        { name:'Lansia (65+)',   value: lansia },
       ];
+
+  /* ── pertumbuhan from admin s.pertumbuhan ────────────────── */
+  const growthBase = (s.pertumbuhan || s.pertumbuhan5Tahun || []);
   const growthData = growthBase.map(g=>({
     tahun: g.tahun,
     'Total Penduduk': g.jumlah,
@@ -145,16 +143,15 @@ const Profil = () => {
   }));
 
   const genderData = [
-  { name: "Laki-laki", value: lk, color: "#3b82f6" },
-  { name: "Perempuan", value: pr, color: "#ec4899" },
-];
+    { name: "Laki-laki", value: lk, color: "#3b82f6" },
+    { name: "Perempuan", value: pr, color: "#ec4899" },
+  ];
 
-  /* ── kelengkapan admin (from s.kelengkapanAdmin) ── */
+  /* ── kelengkapan admin ── */
   const adminData = s.kelengkapanAdmin ? [
-    { name:'KTP',        value:s.kelengkapanAdmin.ktp       },
-    { name:'Kartu Keluarga', value:s.kelengkapanAdmin.kk    },
-    { name:'Akte Lahir', value:s.kelengkapanAdmin.akteLahir },
-    { name:'BPJS',       value:s.kelengkapanAdmin.bpjs      },
+    { name:'KTP',        value:s.kelengkapanAdmin.ktpCount || Math.round(total * 0.98) },
+    { name:'Kartu Keluarga', value:s.kelengkapanAdmin.kkCount || kk },
+    { name:'Akte Lahir', value:s.kelengkapanAdmin.akteCount || Math.round(total * 0.95) },
   ] : [];
 
   /* ── status sosial ──────────────────────────────── */
@@ -167,10 +164,13 @@ const Profil = () => {
 
   /* ── kesehatan ──────────────────────────────────── */
   const kes = s.kesehatan || {};
-  const kesehatanBpjs = [
+  const kesehatanBpjs = s.bpjsComposition ? s.bpjsComposition.map(b => ({
+    name: b.name, value: b.value, color: b.name.includes('Mandiri') ? '#06b6d4' : b.name.includes('KIS') ? '#10b981' : '#ef4444'
+  })) : [
     { name:'BPJS Aktif', value: kes.bpjs||0,   color:'#10b981' },
     { name:'Non BPJS',   value: kes.nonBpjs||0, color:'#ef4444' },
   ];
+
 
   return (
 <>
@@ -316,6 +316,78 @@ const Profil = () => {
             <p className="sejarah-text">{d.sejarah||'-'}</p>
           </div>
         </div>
+
+        {/* PERANGKAT DESA / ANGGOTA */}
+        <div className="pc" id="perangkat-desa">
+          <SecHead
+            icon={<Users size={18}/>}
+            title="Perangkat Desa"
+            sub="Struktur organisasi & aparat pemerintah desa Parakan Ciomas"
+            color="#8b5cf6"
+          />
+          <div style={{padding:'22px'}}>
+            {sortedAparat.length === 0 ? (
+              <div style={{textAlign:'center', padding:'2rem', color:'#64748b'}}>
+                <UserX size={40} style={{marginBottom:'0.5rem', opacity:0.5}} />
+                <p>Data perangkat desa belum tersedia.</p>
+              </div>
+            ) : (
+              <div className="members-grid" style={{display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(240px, 1fr))', gap:'1.25rem'}}>
+                {sortedAparat.map((m, idx) => {
+                  const COLORS = ['#6366f1','#10b981','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#ec4899'];
+                  const color = COLORS[idx % COLORS.length];
+                  return (
+                    <div key={m.id} className="member-card" style={{background:'#fff', borderRadius:14, border:'1px solid #e2e8f0', overflow:'hidden', boxShadow:'0 3px 12px rgba(0,0,0,0.04)', display:'flex', flexDirection:'column'}}>
+                      <div style={{position:'relative', width:'100%', height:200, background:color, overflow:'hidden'}}>
+                        {m.foto ? (
+                          <img
+                            src={m.foto}
+                            alt={m.nama}
+                            style={{width:'100%', height:'100%', objectFit:'cover'}}
+                            onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                          />
+                        ) : (
+                          <div style={{display:'flex', alignItems:'center', justifyContent:'center', height:'100%', fontSize:'2.5rem', fontWeight:800, color:'#fff'}}>
+                            {(m.nama || 'A')[0].toUpperCase()}
+                          </div>
+                        )}
+                        <span style={{position:'absolute', bottom:10, left:10, right:10, background:'rgba(15,23,42,0.85)', backdropFilter:'blur(4px)', color:'#fff', fontSize:11, fontWeight:700, padding:'4px 10px', borderRadius:20, textAlign:'center'}}>
+                          {m.jabatan}
+                        </span>
+                      </div>
+                      <div style={{padding:16, flex:1, display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
+                        <div>
+                          <h4 style={{margin:'0 0 4px', fontSize:14, fontWeight:700, color:'#0f172a'}}>{m.nama}</h4>
+                          <p style={{margin:0, fontSize:12, color, fontWeight:600}}>{m.jabatan}</p>
+                        </div>
+                        <div style={{marginTop:12, paddingTop:10, borderTop:'1px solid #f1f5f9', display:'flex', flexDirection:'column', gap:6, fontSize:11, color:'#64748b'}}>
+                          {m.email && (
+                            <div style={{display:'flex', alignItems:'center', gap:6}}>
+                              <Mail size={12} style={{color}} />
+                              <span style={{overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap'}}>{m.email}</span>
+                            </div>
+                          )}
+                          {m.telp && (
+                            <div style={{display:'flex', alignItems:'center', gap:6}}>
+                              <Phone size={12} style={{color}} />
+                              <span>{m.telp}</span>
+                            </div>
+                          )}
+                          {m.nip && (
+                            <div style={{fontSize:10, color:'#94a3b8', marginTop:2}}>
+                              NIP: {m.nip}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </div>
+
 
 
         {/* ══════════════════════════════════════════════

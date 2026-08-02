@@ -73,8 +73,8 @@ const Anggota = () => {
             {sorted.map((m, idx) => {
               const color = COLORS[idx % COLORS.length];
 
-              // Ambil foto berdasarkan ID anggota
-              const foto = FOTO_ANGGOTA[m.id];
+              // Ambil foto berdasarkan ID anggota (prioritas: data → default)
+              const foto = (m.foto && m.foto.trim()) ? m.foto : FOTO_ANGGOTA[m.id];
 
               return (
                 <div

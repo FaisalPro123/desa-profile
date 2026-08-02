@@ -329,3 +329,58 @@
   margin-bottom: 2.5rem;
   font-style: italic;
 }
+
+/* ══════════════════════════════════════════
+   DARK MODE — CCTV & PENGADUAN OVERRIDES
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .cctv-card,
+[data-theme="dark"] .pengaduan-info,
+[data-theme="dark"] .pengaduan-form,
+[data-theme="dark"] .pengaduan-success {
+  background: #152033;
+  border-color: rgba(255,255,255,.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+[data-theme="dark"] .cctv-lokasi,
+[data-theme="dark"] .pengaduan-info h3,
+[data-theme="dark"] .pengaduan-form h3,
+[data-theme="dark"] .pengaduan-success h2 { color: #ffffff; }
+
+[data-theme="dark"] .cctv-lokasi-input,
+[data-theme="dark"] .cctv-url-input {
+  background: #0f172a;
+  border-color: rgba(255,255,255,.15);
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .cctv-note {
+  background: #0f172a;
+  border-color: rgba(255,255,255,.08);
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .cctv-status-bar {
+  background: rgba(16,185,129,.12);
+  border-color: rgba(16,185,129,.3);
+  color: #6ee7b7;
+}
+
+[data-theme="dark"] .peng-step-num { background: #1e293b; color: #a5b4fc; }
+[data-theme="dark"] .peng-step p { color: #cbd5e1; }
+
+[data-theme="dark"] .peng-kontak {
+  background: rgba(245,158,11,.12);
+  border-color: rgba(245,158,11,.25);
+  color: #fbbf24;
+}
+[data-theme="dark"] .peng-kontak p { color: #fbbf24; }
+[data-theme="dark"] .peng-kontak strong { color: #fde68a; }
+
+[data-theme="dark"] .peng-error {
+  background: rgba(239,68,68,.12);
+  color: #fca5a5;
+}
+
+[data-theme="dark"] .pengaduan-success p { color: #94a3b8; }
+

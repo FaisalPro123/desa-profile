@@ -93,6 +93,9 @@ import AdminPengajuanDokumen
 import AdminPeta
   from './pages/admin/AdminPeta';
 
+import AdminSettings
+  from './pages/admin/AdminSettings';
+
 
 // ======================================================
 // GLOBAL CSS
@@ -213,23 +216,12 @@ export default function App() {
             />
 
 
-            {/* ANGGOTA / APARAT DESA */}
-
+            {/* ANGGOTA (REDIRECT TO PROFIL) */}
             <Route
-
               path="/anggota"
-
-              element={
-
-                <PublicLayout>
-
-                  <Anggota />
-
-                </PublicLayout>
-
-              }
-
+              element={<Navigate to="/profil" replace />}
             />
+
 
 
             {/* STATISTIK */}
@@ -526,6 +518,21 @@ export default function App() {
                 element={
 
                   <AdminPeta />
+
+                }
+
+              />
+
+
+              {/* PENGATURAN DATA */}
+
+              <Route
+
+                path="settings"
+
+                element={
+
+                  <AdminSettings />
 
                 }
 

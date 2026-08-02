@@ -13,6 +13,7 @@ import {
 import { useApp } from '../../context/AppContext';
 import { exportCsv } from '../../utils/exportCsv';
 import ImageUploader from '../../components/ImageUploader';
+import PhotoUrlInput from '../../components/PhotoUrlInput';
 
 const EMPTY = {
   nama: '',
@@ -510,25 +511,16 @@ export default function AdminUmkm() {
                 {/* URL FOTO */}
                 <div className="adm-form-group full">
 
-                  <label>
-                    URL Gambar
-                  </label>
-
-                  <input
-                    type="text"
-                    placeholder="https://example.com/logo.jpg"
-                    value={
-                      form.gambar &&
-                      form.gambar.startsWith('http')
-                        ? form.gambar
-                        : ''
-                    }
-                    onChange={(e) =>
+                  <PhotoUrlInput
+                    value={form.gambar}
+                    onChange={(gambar) =>
                       setForm({
                         ...form,
-                        gambar: e.target.value
+                        gambar: gambar
                       })
                     }
+                    label="URL Gambar (gambar langsung)"
+                    placeholder="https://contoh.com/logo.jpg"
                   />
 
                 </div>

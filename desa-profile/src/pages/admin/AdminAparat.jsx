@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Plus, Pencil, Trash2, X, Save } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import ImageUploader from '../../components/ImageUploader';
+import PhotoUrlInput from '../../components/PhotoUrlInput';
 
 const EMPTY = {
   nama: '',
@@ -232,24 +233,16 @@ export default function AdminAparat() {
                 {/* URL FOTO */}
                 <div className="adm-form-group full">
 
-                  <label>
-                    URL Foto
-                  </label>
-
-                  <input
-                    type="text"
-                    placeholder="https://example.com/foto.jpg"
-                    value={
-                      form.foto?.startsWith('http')
-                        ? form.foto
-                        : ''
-                    }
-                    onChange={(e) =>
+                  <PhotoUrlInput
+                    value={form.foto}
+                    onChange={(foto) =>
                       setForm({
                         ...form,
-                        foto: e.target.value,
+                        foto,
                       })
                     }
+                    label="URL Foto (gambar langsung)"
+                    placeholder="https://contoh.com/foto.jpg"
                   />
 
                 </div>

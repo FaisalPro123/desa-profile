@@ -462,3 +462,81 @@
     bottom: 10px;
   }
 }
+
+/* ══════════════════════════════════════════
+   DARK MODE — INTERACTIVE MAP OVERRIDES
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .cyber-map-container {
+  background: #0b1120;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .map-compass-badge {
+  background: rgba(21, 32, 51, 0.95);
+}
+
+[data-theme="dark"] .compass-ring {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .map-legend-panel {
+  background: rgba(21, 32, 51, 0.97);
+}
+
+[data-theme="dark"] .legend-header,
+[data-theme="dark"] .legend-search,
+[data-theme="dark"] .legend-basemap-select {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .legend-header h3 { color: #ffffff; }
+[data-theme="dark"] .legend-search input { color: #f8fafc; }
+[data-theme="dark"] .legend-item { border-bottom-color: rgba(255, 255, 255, 0.06); }
+[data-theme="dark"] .legend-label { color: #e2e8f0; }
+[data-theme="dark"] .legend-count,
+[data-theme="dark"] .basemap-title,
+[data-theme="dark"] .compass-ring span { color: #94a3b8; }
+[data-theme="dark"] .checkbox-box { border-color: #475569; }
+
+[data-theme="dark"] .basemap-btn {
+  background: #152033;
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .basemap-btn.active {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: #fff;
+}
+
+[data-theme="dark"] .map-control-btn {
+  background: rgba(21, 32, 51, 0.98);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .map-control-btn:hover {
+  background: #1e293b;
+  color: #a5b4fc;
+}
+
+[data-theme="dark"] .cyber-popup .leaflet-popup-content-wrapper {
+  background: #152033;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .cyber-popup .leaflet-popup-tip {
+  background: #152033;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .popup-title { color: #ffffff; }
+[data-theme="dark"] .popup-desc,
+[data-theme="dark"] .popup-status { color: #94a3b8; }
+
+[data-theme="dark"] .rw-label-tooltip .leaflet-tooltip-content {
+  background: rgba(21, 32, 51, 0.95);
+  color: #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}

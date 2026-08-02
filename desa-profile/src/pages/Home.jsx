@@ -2,12 +2,13 @@ import {
   ArrowRight, Users, TrendingUp, Building2, Newspaper, MapPin, ChevronDown,
   Landmark, Award, BookOpen, Target, Store, Camera, MessageSquare,
   Navigation, Compass, ExternalLink, Wifi, WifiOff, MonitorOff,
-  Send, CheckCircle, AlertCircle, X, ChevronRight
+  Send, CheckCircle, AlertCircle, X, ChevronRight, Sprout
 } from 'lucide-react';
 import { useEffect, useState, useRef } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import { useApp } from '../context/AppContext';
 import InteractiveMap from '../components/InteractiveMap';
+import Statistik from './Statistik';
 import heroDesa from '../assets/hero-desa.png';
 
 /* ─── Smooth scroll helper ─── */
@@ -32,7 +33,15 @@ function BeritaModal({ item, onClose }) {
         <button className="modal-close" onClick={onClose}><X size={20} /></button>
         {item.gambar && (
           <div className="modal-img">
-            <img src={item.gambar} alt={item.judul} />
+            <img
+              src={item.gambar}
+              alt={item.judul}
+              onError={(e) => {
+                e.target.style.display = 'none';
+                const wrap = e.target.parentElement;
+                if (wrap) wrap.style.display = 'none';
+              }}
+            />
           </div>
         )}
         <div className="modal-content">
@@ -123,7 +132,8 @@ const Home = () => {
       <section className="sp-hero" style={{ backgroundImage: `url(${heroDesa})` }}>
         <div className="sp-hero-overlay" />
         <div className="sp-hero-content">
-         
+          
+          <div className="sp-hero-badge"><Sprout size={14} /> Portal Resmi Pemerintahan Desa</div>
           <h1>Selamat Datang di<br /><span>{infoDesa.nama || 'Desa Parakan Ciomas'}</span></h1>
           <p>{infoDesa.kecamatan}, {infoDesa.kota}, {infoDesa.provinsi}</p>
           <div className="sp-hero-btns">
@@ -164,7 +174,7 @@ const Home = () => {
       <section id="profil" className="sp-section sp-alt">
         <div className="sp-container">
           <div className="sp-sec-header">
-           
+            <span className="sp-badge"><Landmark size={14} /> Tentang Desa</span>
             <h2>Profil Desa</h2>
             <p>Informasi lengkap tentang {infoDesa.nama}</p>
           </div>
@@ -219,7 +229,7 @@ const Home = () => {
       <section id="anggota" className="sp-section">
         <div className="sp-container">
           <div className="sp-sec-header">
-            
+           
             <h2>Perangkat Desa</h2>
             <p>Struktur organisasi pemerintahan {infoDesa.nama}</p>
           </div>
@@ -263,51 +273,9 @@ const Home = () => {
       </section>
 
       {/* ══════════ STATISTIK ══════════ */}
-      <section id="statistik" className="sp-section sp-alt">
+      <section id="statistik" className="sp-section sp-alt" style={{ padding: '3rem 0' }}>
         <div className="sp-container">
-          <div className="sp-sec-header">
-           
-            <h2>Statistik Kependudukan</h2>
-            <p>Visualisasi data demografi warga {infoDesa.nama}</p>
-          </div>
-          <div className="sp-stat-summary">
-            {[
-              ['Total Penduduk', statistik.totalPenduduk, '#6366f1'],
-              ['Laki-laki', statistik.lakiLaki, '#3b82f6'],
-              ['Perempuan', statistik.perempuan, '#ec4899'],
-              ['Kepala Keluarga', statistik.kk, '#10b981'],
-            ].map(([l, v, c]) => (
-              <div className="sp-stat-sm" key={l} style={{ borderColor: c }}>
-                <div className="sp-stat-sm-num" style={{ color: c }}>{(v || 0).toLocaleString()}</div>
-                <div className="sp-stat-sm-lbl">{l}</div>
-              </div>
-            ))}
-          </div>
-          <div className="sp-charts-grid">
-            {[
-              { title: 'Distribusi Gender', data: genderData },
-              { title: 'Tingkat Pendidikan', data: pendidikanData },
-              { title: 'Jenis Pekerjaan', data: pekerjaanData },
-            ].map(({ title, data }) => (
-              <div className="sp-chart-card" key={title}>
-                <h4>{title}</h4>
-                {data.length > 0 && data.some(d => d.value > 0) ? (
-                  <ResponsiveContainer width="100%" height={260}>
-                    <PieChart>
-                      <Pie data={data} cx="50%" cy="45%" outerRadius={80} dataKey="value"
-                        label={({ percent }) => percent > 0.05 ? `${(percent*100).toFixed(0)}%` : ''}>
-                        {data.map((d, i) => <Cell key={i} fill={d.color}/>)}
-                      </Pie>
-                      <Tooltip formatter={(v, n) => [v.toLocaleString(), n]} />
-                      <Legend />
-                    </PieChart>
-                  </ResponsiveContainer>
-                ) : (
-                  <div className="sp-chart-empty"><TrendingUp size={32}/><p>Data belum tersedia</p></div>
-                )}
-              </div>
-            ))}
-          </div>
+          <Statistik embedded={true} />
         </div>
       </section>
 
@@ -315,12 +283,13 @@ const Home = () => {
       <section id="peta" className="sp-section">
         <div className="sp-container">
           <div className="sp-sec-header">
+         
             <h2>Peta Desa Interaktif</h2>
             <p>Peta wilayah administrasi, batas RW, dan fasilitas {infoDesa.nama}</p>
           </div>
           
           <div style={{ marginTop: '1.5rem', marginBottom: '2rem' }}>
-            <InteractiveMap height="640px" />
+            <InteractiveMap height="600px" />
           </div>
 
           <div className="sp-peta-info" style={{ marginTop: '1rem' }}>

@@ -14,10 +14,25 @@
   color-scheme: light;
   color: #0f172a;
 
+  --bg-page: #f0f2f8;
+  --bg-page-dark: #0b1120;
+  --surface: #ffffff;
+  --surface-dark: #152033;
+  --surface-2-dark: #1e293b;
+  --text: #0f172a;
+  --text-strong: #ffffff;
+  --text-muted: #64748b;
+  --text-soft-dark: #94a3b8;
+  --border-dark: rgba(255, 255, 255, 0.1);
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 * {
